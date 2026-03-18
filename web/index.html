@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Daily English Words</title>
+  </head>
+  <body>
+    <header>
+      <h1>Daily English Words</h1>
+      <p>Build your vocabulary, one day at a time</p>
+    </header>
+    <main>
+      <!-- Tab navigation -->
+      <nav>
+        <button class="tabs__btn tabs__btn--active" data-tab="today">
+          Today's Words
+        </button>
+        <button class="tabs__btn" data-tab="random">Random Practice</button>
+      </nav>
+
+      <!-- Loading indicator -->
+      <div id="loading" hidden>
+        <div></div>
+        <p>Loading words...</p>
+      </div>
+
+      <!-- Error message -->
+      <div id="error" hidden>
+        <p id="error-message"></p>
+        <button id="retry-btn">Try Again</button>
+      </div>
+
+      <!-- Word cards container -->
+      <section id="words-container">
+        <!-- Word cards are rendered here by JavaScript -->
+      </section>
+    </main>
+    <footer>
+      <p>Practice daily. Stay consistent. Get Fluent</p>
+    </footer>
+
+    <!-- Load JS as ES Module -->
+    <script type="module" src="/static/js/app.js"></script>
+  </body>
+</html>
