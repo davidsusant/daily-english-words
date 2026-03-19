@@ -27,10 +27,6 @@ func Load() (*Config, error) {
 		ServerPort: getEnv("SERVER_PORT", "8080"),		
 	}
 
-	if cfg.DBPassword == "" {
-		return nil, fmt.Errorf("DB_PASSWORD environment variable is required")
-	}
-
 	return cfg, nil
 }
 
