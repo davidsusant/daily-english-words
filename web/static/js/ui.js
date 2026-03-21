@@ -51,7 +51,7 @@ export function renderWords(words) {
 
   if (words.length === 0) {
     container.innerHTML =
-      "<p>No words available. Try seeding the database.</p>";
+      '<p style="text-align:center; color:#8b8d98;">No words available. Try seeding the database.</p>';
     return;
   }
 
@@ -68,15 +68,16 @@ export function renderWords(words) {
  */
 function createWordCard(word) {
   const card = document.createElement("article");
+  card.className = "word-card";
 
   card.innerHTML = `
-        <div>
-            <span>${escapeHTML(word.word)}</span>
-            <span>${escapeHTML(word.part_of_speech)}</span>
-            <span>${escapeHTML(word.difficulty)}</span>
+        <div class="word-card__header">
+            <span class="word-card__word">${escapeHTML(word.word)}</span>
+            <span class="word-card__pos">${escapeHTML(word.part_of_speech)}</span>
+            <span class="word-card__badge word-card__badge--${word.difficulty}">${escapeHTML(word.difficulty)}</span>
         </div>
-        <p>${escapeHTML(word.definition)}</p>
-        <p>${escapeHTML(word.example)}</p>
+        <p class="word-card__definition">${escapeHTML(word.definition)}</p>
+        <p class="word-card__example">"${escapeHTML(word.example)}"</p>
     `;
 
   return card;

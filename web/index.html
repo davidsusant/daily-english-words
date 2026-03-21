@@ -1,16 +1,19 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Daily English Words</title>
+    <link rel="stylesheet" href="static/css/style.css" />
   </head>
   <body>
-    <header>
-      <h1>Daily English Words</h1>
-      <p>Build your vocabulary, one day at a time</p>
+    <header class="header">
+      <h1 class="header__title">Daily English Words</h1>
+      <p class="header__subtitle">Build your vocabulary, one day at a time</p>
     </header>
-    <main>
+    <main class="main">
       <!-- Tab navigation -->
-      <nav>
+      <nav class="tabs">
         <button class="tabs__btn tabs__btn--active" data-tab="today">
           Today's Words
         </button>
@@ -18,23 +21,23 @@
       </nav>
 
       <!-- Loading indicator -->
-      <div id="loading" hidden>
-        <div></div>
+      <div id="loading" class="loading" hidden>
+        <div class="loading__spinner"></div>
         <p>Loading words...</p>
       </div>
 
       <!-- Error message -->
-      <div id="error" hidden>
+      <div id="error" class="error" hidden>
         <p id="error-message"></p>
-        <button id="retry-btn">Try Again</button>
+        <button id="retry-btn" class="btn btn--secondary">Try Again</button>
       </div>
 
       <!-- Word cards container -->
-      <section id="words-container">
+      <section id="words-container" class="word-container">
         <!-- Word cards are rendered here by JavaScript -->
       </section>
     </main>
-    <footer>
+    <footer class="footer">
       <p>Practice daily. Stay consistent. Get Fluent</p>
     </footer>
 
