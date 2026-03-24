@@ -64,7 +64,7 @@ func NewClient(apiKey string) *Client {
 		httpClient: &http.Client{
 			Timeout: 30 * time.Second,
 		},
-		model: "gemini-2.0-flash",
+		model: "gemini-2.5-flash",
 	}
 }
 
