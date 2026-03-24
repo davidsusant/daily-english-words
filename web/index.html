@@ -11,7 +11,30 @@
       <h1 class="header__title">Daily English Words</h1>
       <p class="header__subtitle">Build your vocabulary, one day at a time</p>
     </header>
+
     <main class="main">
+      <!-- Generate new words panel -->
+      <section class="generate-panel">
+        <div class="generate-panel__controls">
+          <select id="difficulty-select" class="generate-panel__select">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+          <select id="count-select" class="generate-panel__select">
+            <option value="3">3 words</option>
+            <option value="5" selected>5 words</option>
+            <option value="10">10 words</option>
+          </select>
+          <button id="generate-btn" class="btn btn--generate">
+            <span class="btn__icon">&#9889;</span>
+            Generate Words
+          </button>
+        </div>
+        <!-- Status message after generation -->
+        <div id="generate-status" class="generate-panel__status" hidden></div>
+      </section>
+
       <!-- Tab navigation -->
       <nav class="tabs">
         <button class="tabs__btn tabs__btn--active" data-tab="today">
@@ -37,6 +60,7 @@
         <!-- Word cards are rendered here by JavaScript -->
       </section>
     </main>
+
     <footer class="footer">
       <p>Practice daily. Stay consistent. Get Fluent</p>
     </footer>

@@ -70,6 +70,86 @@ body {
   padding: 0 1rem 3rem;
 }
 
+/* Generate Panel */
+.generate-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.generate-panel__controls {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.generate-panel__select {
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+
+.generate-panel__select:hover {
+  border-color: var(--color-muted);
+}
+
+.generate-panel__select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.btn--generate {
+  margin-left: auto;
+  padding: 0.6rem 1.4rem;
+  background: linear-gradient(
+    135deg,
+    var(--color-accent),
+    var(--color-accent-2)
+  );
+  color: #0f1117;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.btn--generate:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(110, 231, 183, 0.25);
+}
+
+.btn--generate:active {
+  transform: translateY(0);
+}
+
+.btn--generate:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn__icon {
+  font-size: 1rem;
+}
+
+/* Spinning icon while generating */
+
 /* Tabs */
 .tabs {
   display: flex;
@@ -173,6 +253,21 @@ body {
 }
 .word-card:nth-child(5) {
   animation-delay: 0.28s;
+}
+.word-card:nth-child(6) {
+  animation-delay: 0.28s;
+}
+.word-card:nth-child(7) {
+  animation-delay: 0.35s;
+}
+.word-card:nth-child(8) {
+  animation-delay: 0.42s;
+}
+.word-card:nth-child(9) {
+  animation-delay: 0.49s;
+}
+.word-card:nth-child(10) {
+  animation-delay: 0.56s;
 }
 
 @keyframes fadeInUp {
@@ -278,6 +373,20 @@ body {
 @media (max-width: 480px) {
   .header__title {
     font-size: 1.5rem;
+  }
+
+  .generate-panel__controls {
+    flex-direction: column;
+  }
+
+  .generate-panel__select {
+    width: 100%;
+  }
+
+  .btn--generate {
+    width: 100%;
+    justify-content: center;
+    margin-left: 0;
   }
 
   .word-card {

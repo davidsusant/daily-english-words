@@ -4,6 +4,7 @@ import (
 	"context"
 	"daily-english-words/internal/config"
 	"daily-english-words/internal/database"
+	"daily-english-words/internal/gemini"
 	"daily-english-words/internal/handler"
 	"daily-english-words/internal/repository"
 	"fmt"
@@ -31,28 +32,33 @@ func main() {
 	defer pool.Close()
 	log.Println("Connected to PostgreSQL")
 
-	// Step 3: Initialize layers
+	// Step 3: Initialize clients
+	geminiClient := gemini.NewClient(cfg.GeminiAPIKey)
+	log.Println("Gemini client initialized")
+
+	// Step 4: Initialize layers
 	wordRepo := repository.NewWordRepository(pool)
 	wordHandler := handler.NewWordHandler(wordRepo)
+	generateHandler := handler.NewGenerateHandler(wordRepo, geminiClient)
 
-	// Step 4: Register routes
+	// Step 5: Register routes
 	mux := http.NewServeMux()
 
 	// API routes
 	mux.HandleFunc("/api/words/today", wordHandler.HandleTodayWords)
 	mux.HandleFunc("/api/words/random", wordHandler.HandleRandomWords)
+	mux.HandleFunc("/api/generate", generateHandler.HandleGenerate)
 
 	// Serve frontend static files
-	// The web/ directory contains index.html and static assets
 	fs := http.FileServer(http.Dir("web"))
 	mux.Handle("/", fs)
 
-	// Step 5: Start server with graceful shutdown
+	// Step 6: Start server with graceful shutdown
 	server := &http.Server{
 		Addr: fmt.Sprintf(":%s", cfg.ServerPort),
 		Handler: mux,
 		ReadTimeout: 10 * time.Second,
-		WriteTimeout: 10 * time.Second,
+		WriteTimeout: 60 * time.Second,
 		IdleTimeout: 30 * time.Second,
 	}
 

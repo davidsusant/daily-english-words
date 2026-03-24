@@ -138,3 +138,45 @@ func (r *WordRepository) assignWWordsToDate(ctx context.Context, date string, n 
 
 	return  nil
 }
+
+func (r *WordRepository) InsertWords(ctx context.Context, words []model.Word) ([]model.Word, error) {
+	query := `
+		INSERT INTO words (word, part_of_speech, definition, example, difficulty)
+		VALUES ($1, $2, $3, $4, $5)
+		ON CONFLICT (word) DO NOTHING
+		RETURNING id, word, part_of_speech, definition, example, difficulty, assigned_date, created_at
+	`
+
+	var inserted []model.Word
+
+	for _, w := range words {
+		row := r.pool.QueryRow(ctx, query, 
+			w.Word, 
+			w.PartOfSpeech, 
+			w.Definition,
+			w.Example, 
+			w.Difficulty,
+		)
+
+		var result model.Word
+		err := row.Scan(
+			&result.ID,
+			&result.Word,
+			&result.PartOfSpeech,
+			&result.Definition,
+			&result.Example,
+			&result.Difficulty, 
+			&result.AssignedDate,
+			&result.CreatedAt,
+		)
+
+		if err != nil {
+			// pgx returns no rows error when ON CONFLICT skips the insert
+			continue
+		}
+
+		inserted = append(inserted, result)
+	}
+
+	return inserted, nil
+}

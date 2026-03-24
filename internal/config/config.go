@@ -7,12 +7,13 @@ import (
 
 // Config to holds all application configuration
 type Config struct {
-	DBHost		string
-	DBPort		string
-	DBUser		string
-	DBPassword	string
-	DBName		string
-	ServerPort	string
+	DBHost			string
+	DBPort			string
+	DBUser			string
+	DBPassword		string
+	DBName			string
+	ServerPort		string
+	GeminiAPIKey	string
 }
 
 // Load reads configuration from environment variables
@@ -24,7 +25,12 @@ func Load() (*Config, error) {
 		DBUser: 	getEnv("DB_USER", "postgres"),
 		DBPassword: getEnv("DB_PASSWORD", ""),
 		DBName: 	getEnv("DB_NAME", "daily_english_words"),
-		ServerPort: getEnv("SERVER_PORT", "8080"),		
+		ServerPort: getEnv("SERVER_PORT", "8080"),
+		GeminiAPIKey: getEnv("GEMINI_API_KEY", ""),		
+	}
+
+	if cfg.GeminiAPIKey == "" {
+		return nil, fmt.Errorf("GEMINI_API_KEY environment variable is required")
 	}
 
 	return cfg, nil
